@@ -1,10 +1,16 @@
+import { useContext } from "react";
+import { userContext } from "./UserContext";
+
 const Profile = (props) => {
-    console.log(props);
+    const { user } = useContext(userContext);
+
+    if (!user) {
+        return <h2>Please Login</h2>;
+    }
 
     return (
         <div>
-            <h3>Your Profile is registered with:</h3>
-            <h4>{props.email} email address</h4>
+            <pre>{JSON.stringify(user)}</pre>
         </div>
     );
 };

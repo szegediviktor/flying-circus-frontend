@@ -1,20 +1,28 @@
 import Login from "./Login";
 import Signup from "./Signup";
+import UserContext from "./UserContext";
+import Profile from "./Profile";
+import Private from "./Private";
+import Google from "./Google";
 
 function App() {
     const handleSignUpOnSuccess = () => {
         console.log("done");
     };
+    const handleLoginOnSuccess = () => {
+        console.log("done login");
+    };
 
     return (
-        <div className="App">
-            <h2>Sign Up!</h2>
-            <Signup onSuccess={handleSignUpOnSuccess} />
-            <br />
-            <br />
-            <h2>Sign In!</h2>
-            <Login onSuccess={handleSignUpOnSuccess} />
-        </div>
+        <UserContext>
+            <div className="App">
+                <Signup onSuccess={handleSignUpOnSuccess} />
+                <Login onSuccess={handleLoginOnSuccess} />
+                <Google />
+                <Profile />
+                <Private message="secret message" />
+            </div>
+        </UserContext>
     );
 }
 
