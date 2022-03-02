@@ -1,11 +1,12 @@
 import { useState, useContext } from "react";
 import UserForm from "./UserForm";
 import { userContext } from "./UserContext";
+import { useNavigate } from "react-router-dom";
 
 const apiLogin = (email, password) => {
     let status = true;
 
-    return fetch("/signin", {
+    return fetch("/api/signin", {
         method: "POST",
         headers: {
             "Content-type": "application/json",
@@ -23,14 +24,15 @@ const Login = (props) => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const { login } = useContext(userContext);
+    const navigate = useNavigate();
 
     const handleLogin = (email, password) => {
         setError(null);
         setLoading(true);
         apiLogin(email, password)
             .then((user) => {
-                props.onSuccess();
                 login(user);
+                navigate("/");
             })
             .catch((err) => {
                 setError(err);

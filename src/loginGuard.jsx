@@ -1,5 +1,6 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { userContext } from "./UserContext";
+import { useNavigate } from "react-router-dom";
 
 // const loginGuard = (Component) => {
 //     return (props) => {
@@ -13,7 +14,15 @@ import { userContext } from "./UserContext";
 
 const loginGuard = (Component) => {
     const Guarded = (props) => {
+        const navigate = useNavigate();
         const { user } = useContext(userContext);
+
+        useEffect(() => {
+            if (!user) {
+                navigate("/");
+            }
+        }, [navigate, user]);
+
         if (user) {
             return <Component {...props} user={user} />;
         }

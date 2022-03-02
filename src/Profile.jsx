@@ -1,13 +1,6 @@
-import { useContext } from "react";
-import { userContext } from "./UserContext";
+import loginGuard from "./loginGuard";
 
-const Profile = (props) => {
-    const { user } = useContext(userContext);
-
-    if (!user) {
-        return <h2>Please Login</h2>;
-    }
-
+const Profile = ({ user }) => {
     return (
         <div>
             <pre>{JSON.stringify(user)}</pre>
@@ -15,4 +8,4 @@ const Profile = (props) => {
     );
 };
 
-export default Profile;
+export default loginGuard(Profile);

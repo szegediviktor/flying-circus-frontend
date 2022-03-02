@@ -11,7 +11,7 @@ const UserContext = ({ children }) => {
     }, []);
 
     useEffect(() => {
-        fetch("/profile")
+        fetch("/api/profile")
             .then((res) => {
                 if (res.ok) {
                     return res.json();

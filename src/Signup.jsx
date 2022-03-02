@@ -1,10 +1,11 @@
 import { useState } from "react";
 import UserForm from "./UserForm";
+import { useNavigate } from "react-router-dom";
 
 const signup = (email, password) => {
     let status = true;
 
-    return fetch("/signup", {
+    return fetch("/api/signup", {
         method: "POST",
         headers: {
             "Content-type": "application/json",
@@ -31,13 +32,14 @@ const signup = (email, password) => {
 const Signup = (props) => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleSignUp = (email, password) => {
         setError(null);
         setLoading(true);
         signup(email, password)
             .then(() => {
-                props.onSuccess();
+                navigate("/");
             })
             .catch((err) => {
                 setError(err);

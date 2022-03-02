@@ -1,8 +1,11 @@
-import { useCallback, useEffect, useContext } from "react";
+import { useCallback, useEffect, useContext, useRef } from "react";
 import { userContext } from "./UserContext";
+import { useNavigate } from "react-router-dom";
 
 const Google = () => {
     const { login } = useContext(userContext);
+    const popup = useRef(null);
+    const navigate = useNavigate();
 
     const openPopUp = useCallback(() => {
         const width = 600;
@@ -12,7 +15,7 @@ const Google = () => {
 
         const url = "http://localhost:3000/api/google";
 
-        const popUp = window.open(
+        popup.current = window.open(
             url,
             "",
             `toolbar=no, location=no, directories=no, status=no, menubar=no, 
@@ -23,10 +26,12 @@ const Google = () => {
 
     useEffect(() => {
         const listener = (e) => {
-            console.log(e);
             const data = e.data;
-            if (data.email) {
-                login(data);
+            if (typeof data === "string") {
+                const parsed = JSON.stringify(data);
+                login(parsed);
+                popup.current?.close();
+                navigate("/");
             }
         };
         window.addEventListener("message", listener);

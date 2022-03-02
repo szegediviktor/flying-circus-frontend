@@ -2,25 +2,20 @@ import Login from "./Login";
 import Signup from "./Signup";
 import UserContext from "./UserContext";
 import Profile from "./Profile";
-import Private from "./Private";
-import Google from "./Google";
+import { Route, Routes } from "react-router-dom";
+import EnglishTest from "./EnglishTest";
 
 function App() {
-    const handleSignUpOnSuccess = () => {
-        console.log("done");
-    };
-    const handleLoginOnSuccess = () => {
-        console.log("done login");
-    };
-
     return (
         <UserContext>
             <div className="App">
-                <Signup onSuccess={handleSignUpOnSuccess} />
-                <Login onSuccess={handleLoginOnSuccess} />
-                <Google />
-                <Profile />
-                <Private message="secret message" />
+                <Routes>
+                    <Route path="/" element={<h1>Flying Circus</h1>} />
+                    <Route path="/register" element={<Signup />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/test" element={<EnglishTest />} />
+                </Routes>
             </div>
         </UserContext>
     );
