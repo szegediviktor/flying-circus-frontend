@@ -1,0 +1,26 @@
+@import "styles/colors.scss";
+@import "styles/layout.scss";
+
+nav {
+    display: flex;
+    flex-direction: row;
+    background-color: $base-color;
+    @media screen and (max-width: 435px) {
+        flex-direction: column;
+        div {
+            border-bottom: 2px solid $text-primary-color;
+        }
+    }
+
+    div {
+        padding: $base-padding;
+        &:hover {
+            background-color: darken($color: $base-color, $amount: 5%);
+        }
+    }
+    a {
+        text-decoration: none;
+        color: $text-nav-color;
+        font-size: 20px;
+    }
+}

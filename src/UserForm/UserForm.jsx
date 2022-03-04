@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./UserForm.scss";
 
 const UserForm = (props) => {
     const [email, setEmail] = useState("");
@@ -19,7 +20,9 @@ const UserForm = (props) => {
     };
 
     return (
-        <div>
+        <div className="user-form">
+            <h1>{props.title}</h1>
+
             <form className="form" onSubmit={handleSubmit}>
                 <input
                     type="email"
@@ -37,13 +40,15 @@ const UserForm = (props) => {
                     onChange={handlePasswordChange}
                     disabled={props.loading}
                 />
-                <button
-                    type="submit"
-                    className="submit-btn"
-                    disabled={props.loading}
-                >
-                    Submit
-                </button>
+                <div>
+                    <button
+                        type="submit"
+                        className="submit-btn"
+                        disabled={props.loading}
+                    >
+                        Submit
+                    </button>
+                </div>
             </form>
         </div>
     );

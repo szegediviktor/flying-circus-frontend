@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import loginGuard from "./loginGuard";
+import { loginGuard } from "../Auth";
 import Question from "./Question";
 
 const fetchQuestion = () => {
